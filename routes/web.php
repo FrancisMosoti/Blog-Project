@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,8 @@ use App\Http\Controllers\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Home route
+Route::get('/', function () {return "Home";});
 
 
 // register routes
@@ -23,6 +26,11 @@ Route::post('/register', [RegisterController::class,'store']);
 // login routes
 Route::get('/login', [LoginController::class,'login']);
 
-Route::get('/', function () {return "Home";});
+//show users routes
+Route::get('/users', [UsersController::class,'show']);
+
+
+
+
 
 
