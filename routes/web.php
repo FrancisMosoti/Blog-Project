@@ -20,14 +20,16 @@ Route::get('/', function () {return "Home";});
 
 
 // register routes
-Route::get('/register', [RegisterController::class,'register']);
+Route::get('/register', [RegisterController::class,'register'])->name('register');
 Route::post('/register', [RegisterController::class,'store']);
 
 // login routes
-Route::get('/login', [LoginController::class,'login']);
+Route::get('/login', [LoginController::class,'login'])->name('login');
+Route::post('/login', [LoginController::class,'authenticate']);
 
 //show users routes
-Route::get('/users', [UsersController::class,'show']);
+Route::get('/users', [UsersController::class,'show'])->name('users');
+// Route::get('/users', [UsersController::class,'back']);
 
 
 
