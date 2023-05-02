@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use App\Models\Users;
@@ -30,18 +31,23 @@ class RegisterController extends Controller
 
         ]);
 
-        var_dump($errors);
-
         // for data storing purposes
         $user = new Users();
 
         $user->name = $request->name;
         $user->phone = $request->phone;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
 
         $user->save();
 
-        return redirect('/users');
+        if($user){
+            return back()->with('success','Successfully registered');
+        }else{
+            return back()->with('fail','Failed to register');
+
+        }
+
+        // return redirect('/users');
     } 
 }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Users;
+use Session;
 
 class LoginController extends Controller
 {
@@ -22,17 +25,28 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        $email = $credentials['email'];
-        $pass = $credentials['password'];
- 
-        if (Auth::attempt(['email' => $email, 'password' => $pass])) {
-            $request->session()->regenerate();
- 
-            return redirect()->intended('users');
+        $user = Users::where('email', '=', $credentials['email'])->first();
+        if($user){
+            if(Hash::check($credentials['password'], $user->password)){
+                $request->session()->put('email', $user->email);
+                return redirect("/profile");
+
+            }else{
+            return back()->with('fail', 'Password do not match our records.');    
+            }
+
+        }else{
+            return back()->with('fail', 'Email is not registered');
         }
  
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        // if (Auth::attempt($credentials)) {
+        //     $request->session()->regenerate();
+ 
+        //     return redirect('/home');
+        // }
+ 
+        // return back()->withErrors([
+        //     'email' => 'The provided credentials do not match our records.',
+        // ])->onlyInput('email');
     }
 }

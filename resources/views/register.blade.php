@@ -15,6 +15,12 @@
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card my-3" style="border-radius: 15px;">
             <div class="card-body p-5">
+              @if(Session::has('success'))
+              <div class="alert alert-success">{{Session::get('success')}}</div>
+              @endif
+              @if(Session::has('fail'))
+              <div class="alert alert-danger">{{Session::get('fail')}}</div>
+              @endif
               <h2 class="text-uppercase text-center mb-4">Create an account</h2>
 
               <form method="post" action="/register">
@@ -26,12 +32,12 @@
                   @error('name')<div class="text-danger">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="text" name="phone" id="phone" class="form-control form-control-md @error('phone') is-invalid @enderror" />
+                  <input type="text" value="{{ old('phone')?old('phone'):'' }}" name="phone" id="phone" class="form-control form-control-md @error('phone') is-invalid @enderror" />
                   <label class="form-label" for="phone">Your Phone</label>
                   @error('phone')<div class="text-danger">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="text" name="email" id="email" class="form-control form-control-md @error('email') is-invalid @enderror" />
+                  <input type="text" value="{{ old('email')?old('email'):'' }}" name="email" id="email" class="form-control form-control-md @error('email') is-invalid @enderror" />
                   <label class="form-label" for="email">Your Email</label>
                   @error('email')<div class="text-danger">{{ $message }}</div>@enderror
                 </div>
@@ -41,8 +47,8 @@
                   @error('password')<div class="text-danger">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="password" name="password" id="password_confirmation" class="form-control form-control-md @error('password_confirmation') is-invalid @enderror" />
-                  <label class="form-label" for="password_confirmation">Enter Password</label>
+                  <input type="password" name="password_confirmation" id="password_confirmation" class="form-control form-control-md @error('password_confirmation') is-invalid @enderror" />
+                  <label class="form-label" for="password_confirmation">Confirm Password</label>
                   @error('password_confirmation')<div class="text-danger">{{ $message }}</div>@enderror
                 </div>
 
@@ -58,7 +64,7 @@
                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                 </div>
 
-                <p class="text-center text-muted mt-2 mb-0">Have already an account? <a href="{{route('users')}}"
+                <p class="text-center text-muted mt-2 mb-0">Have already an account? <a href="{{route('login')}}"
                     class="fw-bold text-body"><u>Login here</u></a></p>
 
               </form>

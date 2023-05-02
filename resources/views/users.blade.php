@@ -12,11 +12,7 @@
 
 <div class="container mt-5">
     <div>
-        <h2 class='m-3'>REGISTERED USERS</h2>
-    </div>
-    <div>
-        <a href="{{route('login')}}">login</a>
-        <a href="{{route('register')}}">register</a>
+        <a href="{{route('home')}}" class="btn btn-outline-primary mb-3">Home</a>
     </div>
     <table class="table table-bordered ">
     <thead>
@@ -25,6 +21,7 @@
             <th>NAME</th>
             <th>PHONE</th>
             <th>EMAIL</th>
+            <th>pass</th>
         </tr>
     </thead>
 
@@ -35,6 +32,7 @@
             <td>{{ $user->name }}</td>
             <td>{{ $user->phone }}</td>
             <td>{{ $user->email }}</td>
+            <td>{{ $user->password }}</td>
         </tr>
         @endforeach
     </tbody>
