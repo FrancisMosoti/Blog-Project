@@ -12,7 +12,7 @@
 
 <div class="container mt-5">
     <div>
-        <a href="{{route('home')}}" class="btn btn-outline-primary mb-3">Home</a>
+        <!-- <a href="{{route('back')}}" class="btn btn-outline-primary mb-3">Home</a> -->
     </div>
     <table class="table table-bordered ">
     <thead>

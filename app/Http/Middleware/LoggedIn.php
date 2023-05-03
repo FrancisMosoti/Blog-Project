@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Session;
 
 class LoggedIn
 {
@@ -16,9 +17,9 @@ class LoggedIn
      */
     public function handle(Request $request, Closure $next)
     {
-        // if(Session::has('email') && (url('register')) == $request->url() || (url('login')) == $request->url()) {
-        //     return back();
-        // }
+        if(Session::has('email') && (url('register') == $request->url() || url('login')) == $request->url()) {
+            return back();
+        }
         return $next($request);
     }
 }

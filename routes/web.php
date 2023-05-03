@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\profileController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,25 +18,27 @@ use App\Http\Controllers\profileController;
 |
 */
 //Home route
-Route::get('/', function () {return view('home');})->name('home');
-
+Route::get('/', function(){
+    return 'this is home';
+});
+Route::get('/home', [HomeController::class,'profile'])->name('back')->middleware('isLoggedIn');
+// logout routes
+Route::get('/logout', [HomeController::class,'logout'])->name('logout');
 
 // register routes
-Route::get('/register', [RegisterController::class,'register'])->name('register');
+Route::get('/register', [RegisterController::class,'register'])->name('register')->middleware('alreadyLoggedIn');
 Route::post('/register', [RegisterController::class,'store']);
 
 // login routes
-Route::get('/login', [LoginController::class,'login'])->name('login');
+Route::get('/login', [LoginController::class,'login'])->name('login')->middleware('alreadyLoggedIn');
 Route::post('/login', [LoginController::class,'authenticate'])->name('auth');
 
 //show users routes
 Route::get('/users', [UsersController::class,'show'])->name('users');
 
 // profile routes
-Route::get('/profile', [profileController::class,'profile'])->name('profile')->middleware('isLoggedIn');
+// Route::get('/profile', [profileController::class,'profile'])->name('profile');
 
-// logout routes
-Route::get('/logout', [profileController::class,'logout'])->name('logout');
 
 
 

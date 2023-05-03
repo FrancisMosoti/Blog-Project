@@ -61,7 +61,7 @@
 
                 <div class="d-flex justify-content-center">
                   <button type="submit"
-                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                    class="btn btn-dark btn-block btn-lg gradient-custom-4 text-light">Register</button>
                 </div>
 
                 <p class="text-center text-muted mt-2 mb-0">Have already an account? <a href="{{route('login')}}"

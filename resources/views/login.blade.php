@@ -47,7 +47,7 @@
 
                 <div class="d-flex justify-content-center">
                   <button type="submit"
-                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">LOGIN</button>
+                    class="btn btn-dark btn-block btn-lg gradient-custom-4 text-light">LOGIN</button>
                 </div>
 
                 <p class="text-center text-muted mt-2 mb-0">Don't have an account? <a href="{{route('register')}}"
@@ -62,8 +62,8 @@
     </div>
   </div>
 
-  <footer class="">
+  <!-- <footer class="">
     <P class="m-auto bg-success">COPYRIGHT &copy; <?php echo date("Y"); ?></P>
-  </footer>
+  </footer> -->
 </body>
 </html>

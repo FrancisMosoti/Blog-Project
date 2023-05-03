@@ -25,11 +25,13 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+         $user = Users::all();
+
         $user = Users::where('email', '=', $credentials['email'])->first();
         if($user){
             if(Hash::check($credentials['password'], $user->password)){
                 $request->session()->put('email', $user->email);
-                return redirect("/profile");
+                return redirect("/home"); 
 
             }else{
             return back()->with('fail', 'Password do not match our records.');    
