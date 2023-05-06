@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +37,8 @@ Route::post('/login', [LoginController::class,'authenticate'])->name('auth');
 //show users routes
 Route::get('/users', [UsersController::class,'show'])->name('users');
 
-// profile routes
-// Route::get('/profile', [profileController::class,'profile'])->name('profile');
+// posts routes
+Route::post('/posts', [PostController::class,'store'])->name('posts');
 
 
 

@@ -10,7 +10,7 @@
     <title>{{config('app.name')}} - Home</title>
 </head>
 <body class="bg-light">
-     <div class="container-fluid">
+    <div class="container-fluid">
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">My Blog</a>
@@ -26,6 +26,9 @@
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn text-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create Post</button>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
@@ -56,11 +59,72 @@
                 </div>
             </div>
         </nav>
+        <div class="container">
+            <!-- <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card p-2">
+                        <h5 class="card-header">
+                        Create a post
+                        </h5>
+                        <form action="{{route('posts')}}" method="post">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title">
+                                @error('title')<div class="text-danger">{{ $message }}</div>@enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="body" class="form-label">Body Content</label>
+                                <textarea class="form-control @error('body') is-invalid @enderror" id="body" rows="3"></textarea>
+                                @error('body')<div class="text-danger">{{ $message }}</div>@enderror
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">Post</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> -->
+
+
+
+
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create a post</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{route('posts')}}">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="title" class="col-form-label">Title:</label>
+                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"  value="{{ old('title')?old('title'):'' }}" id="title">
+                            @error('title')<div class="text-danger">{{ $message }}</div>@enderror
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="body" class="col-form-label">Message:</label>
+                            <textarea name="body" class="form-control @error('body') is-invalid @enderror"  value="{{ old('body')?old('body'):'' }}" rows="5" id="body"></textarea>
+                            @error('body')<div class="text-danger">{{ $message }}</div>@enderror
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!-- +++++++++++++++++++++++++++++++++++++++++++ -->
+            <h2 class="bg-primary">posts</h2>
+        </div>
+
     </div>
 
-
-   <div class="col-md-6 mx-auto">
-    <h1>post</h1>
-   </div>
 </body>
 </html>
