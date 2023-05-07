@@ -22,7 +22,8 @@ use App\Http\Controllers\PostController;
 Route::get('/', function(){
     return 'this is home';
 });
-Route::get('/home', [HomeController::class,'profile'])->name('back')->middleware('isLoggedIn');
+Route::get('/home', [HomeController::class,'profile'])->middleware('isLoggedIn');
+Route::get('/home', [HomeController::class,'show'])->name('back');
 // logout routes
 Route::get('/logout', [HomeController::class,'logout'])->name('logout');
 
@@ -39,6 +40,7 @@ Route::get('/users', [UsersController::class,'show'])->name('users');
 
 // posts routes
 Route::post('/posts', [PostController::class,'store'])->name('posts');
+Route::get('/posts', [PostController::class,'post'])->name('post');
 
 
 

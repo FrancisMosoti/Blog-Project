@@ -10,8 +10,8 @@
     <title>{{config('app.name')}} - Home</title>
 </head>
 <body class="bg-light">
-    <div class="container-fluid">
-        <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <nav class="navbar navbar-dark bg-dark" id="top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">My Blog</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
@@ -19,7 +19,7 @@
                 </button>
                 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Welcome, {{$data->name}}</h5>
+                    <!-- <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Welcome, </h5> -->
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -30,9 +30,9 @@
                     <li class="nav-item">
                         <button type="button" class="btn text-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create Post</button>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('post')}}">New Post</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Profile
@@ -40,9 +40,9 @@
                         <ul class="dropdown-menu dropdown-menu-dark">
                         <li><a class="dropdown-item" href="#">My Profile</a></li>
                         <!-- <li><a class="dropdown-item" href="#">Register</a></li> -->
-                        <li class="dropdown-item">Name : <span class="text-primary">{{$data->name}}</span></li>
-                        <li class="dropdown-item">Phone : <span class="text-primary">{{$data->phone}}</span></li>
-                        <li class="dropdown-item">Email : <span class="text-primary">{{$data->email}}</span></li>
+                        <!-- <li class="dropdown-item">Name : <span class="text-primary"></span></li>
+                        <li class="dropdown-item">Phone : <span class="text-primary"></span></li>
+                        <li class="dropdown-item">Email : <span class="text-primary"></span></li> -->
                         <!-- <li><a class="dropdown-item" href="#">Register</a></li> -->
                         <li>
                             <hr class="dropdown-divider">
@@ -60,37 +60,13 @@
             </div>
         </nav>
         <div class="container">
-            <!-- <div class="row">
-                <div class="col-md-6 mx-auto">
-                    <div class="card p-2">
-                        <h5 class="card-header">
-                        Create a post
-                        </h5>
-                        <form action="{{route('posts')}}" method="post">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Title</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title">
-                                @error('title')<div class="text-danger">{{ $message }}</div>@enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="body" class="form-label">Body Content</label>
-                                <textarea class="form-control @error('body') is-invalid @enderror" id="body" rows="3"></textarea>
-                                @error('body')<div class="text-danger">{{ $message }}</div>@enderror
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Post</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div> -->
+   
 
 
 
 
 
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog dialog-centered">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -119,10 +95,41 @@
                 </div>
                 </div>
             </div>
-            </div>
+            </div> -->
             <!-- +++++++++++++++++++++++++++++++++++++++++++ -->
-            <h2 class="bg-primary">posts</h2>
+            <div class="p-4 p-md-5 mb-4 mt-4 rounded text-bg-dark">
+                <div class="col-md-6 px-0">
+                <h1 class="display-4 fst-italic">My Blog</h1>
+                <p class="lead my-3">This is my first blog project using laravel framework. Learns never stops</p>
+                <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+                </div>
+            </div>
+            <!-- +++++++++++++++++++++++++++++++++++ -->
+            @foreach($posts as $post)
+            <div class="col-md-12">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col-auto d-none d-lg-block">
+                    <svg class="bd-placeholder-img" width="300" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    </div>
+                    <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">Category</strong>
+                    <h3 class="mb-0">{{$post->title}}</h3>
+                    <div class="mb-1 text-body-secondary">{{$post->created_at->diffForHumans()}}</div>
+                    <p class="card-text mb-auto">{{$post->body}}</p>
+                    <a href="#" class="stretched-link">Continue reading</a>
+                    </div>
+
+                </div>
+            </div>
+            @endforeach
         </div>
+
+        <footer class="d-flex text-center flex-column bg-secondary p-5 mb-2">
+        <p>Blog built by  <a href="https://francismosoti.netlify.app/" target="_blank">Francis Mosoti</a></p>
+        <p>
+            <a href="#top">Back to top</a>
+        </p>
+        </footer>
 
     </div>
 
